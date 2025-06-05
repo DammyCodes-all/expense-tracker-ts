@@ -118,3 +118,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  :root {
+    --chart-1: #FF6B6B; /* Coral Red */
+    --chart-2: #4ECDC4; /* Turquoise */
+    --chart-3: #45B7D1; /* Sky Blue */
+    --chart-4: #96CEB4; /* Mint Green */
+    --chart-5: #FFEAA7; /* Warm Yellow */
+    --chart-6: #DDA0DD; /* Plum Purple */
+  }
+
+  .dark {
+    --chart-1: #FF6B6B; /* Coral Red */
+    --chart-2: #4ECDC4; /* Turquoise */
+    --chart-3: #45B7D1; /* Sky Blue */
+    --chart-4: #96CEB4; /* Mint Green */
+    --chart-5: #FFEAA7; /* Warm Yellow */
+    --chart-6: #DDA0DD; /* Plum Purple */
+  }
+}

@@ -67,7 +67,7 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
       localStorage.setItem("id", JSON.stringify(6));
     }
     const id: number | undefined =
-      JSON.parse(localStorage.getItem("id") || JSON.stringify(6)) + 1;
+      JSON.parse(localStorage.getItem("id") || JSON.stringify(8)) + 1;
     const newExpense: Expense = {
       id: id,
       date: expense.date || new Date(),
@@ -85,7 +85,7 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
   };
   return (
     <form
-      className="w-full md:w-5/10 bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm min-h-[100px]"
+      className="w-full md:w-[47%] bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm min-h-[100px]"
       onSubmit={handleSubmit}
     >
       <div className="flex items-center justify-between border-b border-gray-200 pb-3">
