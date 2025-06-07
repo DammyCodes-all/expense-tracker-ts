@@ -43,7 +43,6 @@ const getFreqByYear = (list: ExpenseObj[], month: number) => {
     return expense.date?.getMonth() == month;
   });
 };
-
 export function ChartBar({ expenseData, filterYear, className }: ChartProps) {
   const chartData = [
     { month: "January", freq: getFreqByYear(expenseData || [], 0).length },

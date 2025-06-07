@@ -1,7 +1,7 @@
 {
   "name": "react-ts-project",
   "private": true,
-  "version": "0.0.0",
+  "version": ".0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -40,8 +40,6 @@
     "vite": "^6.3.5"
   },
   "overrides": {
-    "react-day-picker": {
-      "date-fns": "^4.1.0"
-    }
+    "react-is": "^19.1.0-rc-69d4b800-20241021"
   }
 }

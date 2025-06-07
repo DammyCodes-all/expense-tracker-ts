@@ -26,9 +26,10 @@ type ExpenseObj = {
 
 type ExpenseListProps = {
   expenseList: ExpenseObj[];
+  onDelete: (id: number | undefined) => void;
 };
 
-const ExpenseTable = ({ expenseList }: ExpenseListProps) => {
+const ExpenseTable = ({ expenseList, onDelete }: ExpenseListProps) => {
   return (
     <div className="w-full max-w-5xl mx-auto bg-card rounded-lg shadow-lg border border-border flex flex-col max-h-[600px] transition-colors duration-200">
       <div className="bg-muted rounded-t-lg">
@@ -81,10 +82,12 @@ const ExpenseTable = ({ expenseList }: ExpenseListProps) => {
                   ${expense.amount.toFixed(2)}
                 </TableCell>
                 <TableCell className="w-[40px] px-3 py-3 text-center">
-                  <Trash
-                    className="cursor-pointer text-destructive hover:text-destructive/80 transition-colors duration-200 mx-auto"
-                    size={16}
-                  />
+                  <button onClick={() => onDelete(expense.id)}>
+                    <Trash
+                      className="cursor-pointer text-destructive hover:text-destructive/80 transition-colors duration-200 mx-auto"
+                      size={16}
+                    />
+                  </button>
                 </TableCell>
               </TableRow>
             ))}

@@ -59,6 +59,14 @@ const App = () => {
       });
     }
   };
+  const handleDelete = (id: number | undefined) => {
+    setState((prevState) => {
+      const updatedExpenseList = prevState.expenseList.filter(
+        (expense) => expense.id !== id
+      );
+      return { ...prevState, expenseList: updatedExpenseList };
+    });
+  };
   const expenseLists =
     state.filteredExpense.length > 0
       ? state.filteredExpense
@@ -83,7 +91,7 @@ const App = () => {
 
           <Filter handleFilter={handleFilter} />
 
-          <ExpenseTable expenseList={expenseLists} />
+          <ExpenseTable expenseList={expenseLists} onDelete={handleDelete} />
         </div>
       </div>
     </>
