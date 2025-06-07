@@ -3,13 +3,6 @@
 import { Pie, PieChart } from "recharts";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
@@ -80,48 +73,64 @@ export function ChartPie({ expenseData, filterYear }: PieChartProps) {
   const chartData = [
     {
       category: "Food",
-      frequency: expenseData ? getFreqByCategory(expenseData, "Food").length : 0,
+      frequency: expenseData
+        ? getFreqByCategory(expenseData, "Food").length
+        : 0,
       fill: "var(--chart-1)",
     },
     {
       category: "Travel",
-      frequency: expenseData ? getFreqByCategory(expenseData, "Travel").length : 0,
+      frequency: expenseData
+        ? getFreqByCategory(expenseData, "Travel").length
+        : 0,
       fill: "var(--chart-2)",
     },
     {
       category: "Bills",
-      frequency: expenseData ? getFreqByCategory(expenseData, "Bills").length : 0,
+      frequency: expenseData
+        ? getFreqByCategory(expenseData, "Bills").length
+        : 0,
       fill: "var(--chart-3)",
     },
     {
       category: "Debt/Savings",
-      frequency: expenseData ? getFreqByCategory(expenseData, "Debt/Savings").length : 0,
+      frequency: expenseData
+        ? getFreqByCategory(expenseData, "Debt/Savings").length
+        : 0,
       fill: "var(--chart-4)",
     },
     {
       category: "Entertainment",
-      frequency: expenseData ? getFreqByCategory(expenseData, "Entertainment").length : 0,
+      frequency: expenseData
+        ? getFreqByCategory(expenseData, "Entertainment").length
+        : 0,
       fill: "var(--chart-5)",
     },
     {
       category: "Miscellaneous",
-      frequency: expenseData ? getFreqByCategory(expenseData, "Miscellaneous").length : 0,
+      frequency: expenseData
+        ? getFreqByCategory(expenseData, "Miscellaneous").length
+        : 0,
       fill: "var(--chart-6)",
     },
   ];
 
   return (
-    <Card className="flex flex-col w-full md:w-[47%]">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Category</CardTitle>
-        <CardDescription>Showing for {filterYear}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[300px]"
-        >
-          <PieChart>
+    <div className="w-full bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm h-[400px]">
+      <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+        <div>
+          <h1 className="font-bold text-xl text-gray-800">
+            Category Breakdown
+          </h1>
+          <p className="text-xs text-gray-500 mt-1">
+            Showing for "{filterYear}"
+          </p>
+        </div>
+      </div>
+
+      <div className="flex-1 flex w-full items-center justify-center overflow-hidden">
+        <ChartContainer config={chartConfig} className="w-full h-full">
+          <PieChart width={300} height={280}>
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
@@ -130,15 +139,19 @@ export function ChartPie({ expenseData, filterYear }: PieChartProps) {
               data={chartData}
               dataKey="frequency"
               nameKey="category"
-              innerRadius={50}
+              innerRadius={40}
+              outerRadius={80}
+              cx="50%"
+              cy="45%"
             />
             <ChartLegend
               content={<ChartLegendContent nameKey="category" />}
-              className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+              className="flex-wrap gap-1 *:basis-1/3 *:justify-center text-xs"
+              wrapperStyle={{ paddingTop: "10px" }}
             />
           </PieChart>
         </ChartContainer>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

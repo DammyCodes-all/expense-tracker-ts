@@ -85,7 +85,7 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
   };
   return (
     <form
-      className="w-full md:w-[47%] bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm min-h-[100px]"
+      className="w-full bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm h-[400px] justify-evenly"
       onSubmit={handleSubmit}
     >
       <div className="flex items-center justify-between border-b border-gray-200 pb-3">
@@ -94,41 +94,42 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
           <p className="text-xs text-gray-500 mt-1">Track your spending</p>
         </div>
       </div>
+      <div className="flex flex-col  gap-4 w-full">
+        <div className="flex items-center gap-3 w-full">
+          <DatePicker
+            className="h-9 flex-1"
+            changeDate={expense.date}
+            onDateChange={handleDateChange}
+          />
+          <input
+            type="number"
+            step="0.01"
+            value={expense.amount === 0 ? "" : expense.amount}
+            className="border border-gray-300 min-w-0 rounded-md px-3 py-2 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 h-9 text-sm"
+            placeholder="Amount"
+            onChange={handleAmountChange}
+          />
+        </div>
 
-      <div className="flex items-center gap-3 w-full">
-        <DatePicker
-          className="h-9 flex-1"
-          changeDate={expense.date}
-          onDateChange={handleDateChange}
-        />
         <input
-          type="number"
-          step="0.01"
-          value={expense.amount === 0 ? "" : expense.amount}
-          className="border border-gray-300 min-w-0 rounded-md px-3 py-2 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 h-9 text-sm"
-          placeholder="Amount"
-          onChange={handleAmountChange}
+          className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 h-9 text-sm"
+          type="text"
+          value={expense.description}
+          placeholder="Description"
+          onChange={handleDescChange}
         />
+
+        <SelectComp
+          className="w-full"
+          content={SelectObject}
+          onValueChange={handleCategoryChange}
+        />
+
+        <Button className="self-end bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2 gap-2 rounded-lg text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200 flex items-center cursor-pointer">
+          <Plus size={16} strokeWidth={2.5} />
+          Add Expense
+        </Button>
       </div>
-
-      <input
-        className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 h-9 text-sm"
-        type="text"
-        value={expense.description}
-        placeholder="Description"
-        onChange={handleDescChange}
-      />
-
-      <SelectComp
-        className="w-full"
-        content={SelectObject}
-        onValueChange={handleCategoryChange}
-      />
-
-      <Button className="self-end bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2 gap-2 rounded-lg text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200 flex items-center cursor-pointer">
-        <Plus size={16} strokeWidth={2.5} />
-        Add Expense
-      </Button>
     </form>
   );
 };

@@ -4,6 +4,9 @@ import { useState } from "react";
 import Filter from "./components/filter";
 import { ChartPie } from "./components/piechart";
 import { Header } from "./components/header";
+import { ChartBar } from "./components/barchart";
+import { Expenselist } from "./dummydata";
+
 type ExpenseObj = {
   id: number | undefined;
   date: Date | undefined;
@@ -19,51 +22,6 @@ type ExpenseObj = {
     | undefined;
 };
 
-//  dummy data
-const Expenselist: ExpenseObj[] = [
-  {
-    id: 1,
-    date: new Date(2022, 10, 20),
-    description: "Groceries",
-    category: "Food",
-    amount: 250.0,
-  },
-  {
-    id: 2,
-    date: new Date(2023, 7, 12),
-    description: "Bus Ticket",
-    category: "Travel",
-    amount: 15.5,
-  },
-  {
-    id: 3,
-    date: new Date(2024, 1, 15),
-    description: "Electricity Bill",
-    category: "Bills",
-    amount: 120.75,
-  },
-  {
-    id: 4,
-    date: new Date(2024, 11, 29),
-    description: "Movie Night",
-    category: "Entertainment",
-    amount: 40.0,
-  },
-  {
-    id: 6,
-    date: new Date(2024, 5, 18),
-    description: "Random Purchase",
-    category: "Miscellaneous",
-    amount: 78.45,
-  },
-  {
-    id: 5,
-    date: new Date(2025, 3, 11),
-    description: "Book Purchase",
-    category: "Debt/Savings",
-    amount: 35.99,
-  },
-];
 type AppState = {
   expenseList: ExpenseObj[];
   filteredExpense: ExpenseObj[];
@@ -108,18 +66,23 @@ const App = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex w-full justify-center items-center bg-gray-50 dark:bg-gray-900 pt-8">
-        <div className="flex flex-col gap-4 items-center justify-center m-auto shadow-lg w-9/10 sm:w-8/10 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-4 font-mono bg-white dark:bg-gray-800">
-          <div className="flex w-full flex-wrap justify-between items-center">
+      <div className="min-h-screen w-full  dark:bg-gray-900 pt-5 px-4 md:px-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <AddExpenseForm onAddExpense={handleExpenseAdd} />
-          </div>
-          <Filter handleFilter={handleFilter} />
-          <div className="flex flex-col md:flex-row w-full justify-between items-center gap-4">
             <ChartPie
               expenseData={expenseLists}
               filterYear={state.filterYear}
             />
+            <ChartBar
+              expenseData={expenseLists}
+              filterYear={state.filterYear}
+              className="md:col-span-2 lg:col-span-1"
+            />
           </div>
+
+          <Filter handleFilter={handleFilter} />
+
           <ExpenseTable expenseList={expenseLists} />
         </div>
       </div>
