@@ -32,8 +32,9 @@ export function DatePicker({
         <Button
           variant={"outline"}
           className={cn(
-            `w-5/10 justify-center sm:justify-start items-center text-left gap-1 md:gap-2 text-sm font-normal ",
-            !date && "text-muted-foreground ${className}`
+            "w-5/10 justify-center sm:justify-start items-center text-left gap-1 md:gap-2 text-sm font-normal",
+            !date && "text-muted-foreground",
+            className
           )}
         >
           <CalendarIcon />
