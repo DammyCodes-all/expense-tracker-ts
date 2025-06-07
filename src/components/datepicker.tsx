@@ -22,10 +22,17 @@ export function DatePicker({
   changeDate,
   onDateChange,
 }: DatePickerProps) {
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date | undefined>(changeDate);
+
   useEffect(() => {
     setDate(changeDate);
   }, [changeDate]);
+
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate); // Update internal state
+    onDateChange?.(selectedDate); // Notify parent component
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -42,7 +49,7 @@ export function DatePicker({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar mode="single" selected={date} onSelect={onDateChange} />
+        <Calendar mode="single" selected={date} onSelect={handleDateSelect} />
       </PopoverContent>
     </Popover>
   );
