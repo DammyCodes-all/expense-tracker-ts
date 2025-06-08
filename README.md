@@ -1,26 +1,33 @@
 # Expense Tracker - React TypeScript Application
 
-A modern, responsive expense tracking application built with React, TypeScript, and Tailwind CSS. Features a clean interface with dark mode support for managing personal expenses.
+A modern, responsive expense tracking application built with React, TypeScript, and Tailwind CSS. Features a clean interface with dark mode support, interactive charts, and comprehensive expense management capabilities.
 
 ## 🚀 Features
 
 - **Add Expenses**: Create new expense entries with date, amount, description, and category
-- **View Expenses**: Display expenses in a clean, organized table format
-- **Filter by Year**: Filter expenses by specific years (2023, 2024, 2025) or view all
+- **View Expenses**: Display expenses in a clean, organized table format with sorting capabilities
+- **Interactive Charts**:
+  - Pie chart showing expense distribution by category
+  - Bar chart displaying monthly expense trends
+- **Advanced Filtering**: Filter expenses by specific years (2023, 2024, 2025) or view all
+- **Date Picker**: Intuitive date selection with calendar interface
 - **Dark Mode Support**: Toggle between light and dark themes
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Category Management**: Organize expenses by categories (Food, Travel, Entertainment, Bills, Debt/Savings, Miscellaneous)
-- **Real-time Calculations**: Automatic total calculation of expenses
+- **Real-time Calculations**: Automatic total calculation and data visualization updates
+- **Data Persistence**: Local storage integration for data persistence
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: React 19\ with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
+- **Frontend Framework**: React 19 with TypeScript
+- **Build Tool**: Vite 6.3.5
+- **Styling**: Tailwind CSS 4.1.8
 - **UI Components**: Shadcn/ui (Radix UI primitives)
-- **Icons**: Lucide React
-- **Date Handling**: date-fns
-- **State Management**: React useState hooks
+- **Charts**: Recharts 2.15.3
+- **Icons**: Lucide React 0.511.0
+- **Date Handling**: date-fns 4.1.0
+- **State Management**: React useState and useEffect hooks
+- **Calendar Component**: React Day Picker 8.10.1
 
 ## 📁 Project Structure
 
@@ -35,50 +42,49 @@ src/
 │   │   └── calendar.tsx
 │   ├── add-expense.tsx     # Expense form component
 │   ├── expense-table.tsx   # Expense display table
-│   ├── datepicker.tsx      # Custom date picker
-│   └── select.tsx          # Custom select component
+│   ├── datepicker.tsx      # Custom date picker with popover
+│   ├── filter.tsx          # Year filter component
+│   ├── piechart.tsx        # Pie chart for category distribution
+│   └── barchart.tsx        # Bar chart for monthly trends
 ├── lib/
-│   └── utils.ts           # Utility functions
+│   └── utils.ts           # Utility functions (cn, etc.)
 ├── App.tsx                # Main application component
-└── main.tsx              # Application entry point
+├── main.tsx              # Application entry point
+└── index.css             # Global styles and Tailwind imports
 ```
 
 ## 🏃‍♂️ Getting Started
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn package manager
+- Node.js (version 18 or higher)
+- npm package manager
 
 ### Installation
 
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd react-ts-project
+   git clone https://github.com/DammyCodes-all/expense-tracker-ts.git
+   cd expense-tracker-ts
    ```
 
 2. **Install dependencies**
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
-3. **Install required UI components**
+3. **Create .npmrc file (if needed for deployment)**
 
    ```bash
-   npx shadcn-ui@latest add button table select popover calendar
+   echo "legacy-peer-deps=true" > .npmrc
    ```
 
 4. **Start the development server**
 
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
 5. **Open your browser**
@@ -90,120 +96,134 @@ src/
 
 1. Fill in the expense form with:
 
-   - **Date**: Select the expense date using the date picker
+   - **Date**: Select the expense date using the interactive date picker
    - **Amount**: Enter the expense amount (supports decimals)
    - **Description**: Add a description for the expense
    - **Category**: Choose from predefined categories
 
 2. Click "Add Expense" to save the entry
 
-### Filtering Expenses
+### Viewing Analytics
+
+- **Pie Chart**: Visual breakdown of expenses by category
+- **Bar Chart**: Monthly expense trends over time
+- **Total Calculations**: Real-time expense totals
+
+### Filtering and Sorting
 
 - Use the "Filter By Year" dropdown to view expenses from specific years
 - Select "All" to view all expenses regardless of year
+- Sort table columns by clicking on headers
 
-### Viewing Expense Details
+## 📊 Charts and Visualization
 
-- All expenses are displayed in a sortable table
-- View totals at the bottom of the table
-- Each row shows date, category, description, and amount
-- Hover effects provide better user interaction
+### Pie Chart Features
+
+- Interactive category-based expense breakdown
+- Hover effects with detailed information
+- Color-coded categories for easy identification
+
+### Bar Chart Features
+
+- Monthly expense trends visualization
+- Responsive design with proper scaling
+- Clean, modern chart styling using Recharts
 
 ## 🎨 Customization
 
 ### Adding New Categories
 
-Update the category union type in the expense type definition:
+Update the category options in your components:
 
 ```typescript
-category:
-  | "Food"
-  | "Travel"
-  | "Entertainment"
-  | "Bills"
-  | "Debt/Savings"
-  | "Miscellaneous"
-  | "YourNewCategory"  // Add your category here
-  | undefined;
+const categories = [
+  "Food",
+  "Travel",
+  "Entertainment",
+  "Bills",
+  "Debt/Savings",
+  "Miscellaneous",
+  "YourNewCategory", // Add your category here
+];
 ```
 
-### Styling
+### Chart Customization
 
-The application uses Tailwind CSS for styling. Key design features:
+Modify chart colors and styling in:
 
-- **Color Scheme**: Gray-based with blue accents
-- **Dark Mode**: Comprehensive dark mode support using `dark:` prefixes
-- **Responsive**: Mobile-first responsive design
-- **Shadows & Borders**: Subtle shadows and borders for depth
+- `src/components/piechart.tsx`
+- `src/components/barchart.tsx`
 
 ### Theme Customization
 
-Modify colors in your Tailwind configuration or update the CSS custom properties for the shadcn/ui components.
+The application uses Tailwind CSS with shadcn/ui components:
+
+- **Color Scheme**: Customizable through CSS variables
+- **Dark Mode**: Comprehensive dark mode support
+- **Responsive**: Mobile-first responsive design
 
 ## 🧪 Development
 
 ### Available Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run build` - Build for production (TypeScript + Vite)
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
 
-### Code Quality
+### Dependencies
+
+#### Core Dependencies
+
+- React 19.1.0
+- TypeScript 5.8.3
+- Vite 6.3.5
+- Tailwind CSS 4.1.8
+
+#### UI and Styling
+
+- @radix-ui components
+- class-variance-authority
+- clsx & tailwind-merge
+- lucide-react icons
+
+#### Charts and Data
+
+- recharts for data visualization
+- date-fns for date manipulation
+- react-day-picker for calendar
+
+## 🚀 Deployment
+
+### Vercel Deployment
+
+This project is configured for easy deployment on Vercel:
+
+1. **Push to GitHub**
+2. **Connect to Vercel**
+3. **Deploy automatically**
 
 The project includes:
 
-- **TypeScript**: Full type safety
-- **ESLint**: Code linting and formatting
-- **Component-based Architecture**: Modular, reusable components
+- `.npmrc` configuration for dependency resolution
+- Optimized build settings
+- TypeScript configuration for production
 
-## 🔧 Configuration
+### Build Configuration
 
-### ESLint Configuration
+- **TypeScript**: Strict mode enabled
+- **Vite**: Optimized for production builds
+- **ESLint**: Code quality enforcement
 
-For production applications, consider enabling type-aware lint rules:
+## 🔧 Configuration Files
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+### Key Configuration Files
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+- `vite.config.ts` - Vite configuration with React plugin
+- `tsconfig.json` - TypeScript configuration
+- `tailwind.config.js` - Tailwind CSS configuration
+- `eslint.config.js` - ESLint rules and plugins
+- `.npmrc` - npm configuration for dependency resolution
 
 ## 📱 Browser Support
 
@@ -211,6 +231,7 @@ export default tseslint.config({
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## 🤝 Contributing
 
@@ -226,11 +247,25 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
-- [Shadcn/ui](https://ui.shadcn.com/) for beautiful UI components
+- [Shadcn/ui](https://ui.shadcn.com/) for beautiful, accessible UI components
 - [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+- [Recharts](https://recharts.org/) for responsive chart components
 - [Lucide](https://lucide.dev/) for clean, consistent icons
 - [Radix UI](https://www.radix-ui.com/) for accessible component primitives
+- [React Day Picker](https://react-day-picker.js.org/) for calendar functionality
+
+## 🔗 Live Demo
+
+[View Live Application](https://expense-tracker-ts-two.vercel.app/)
 
 ---
 
 **Built with ❤️ using React, TypeScript, and modern web technologies.**
+
+### Recent Updates
+
+- ✅ Fixed dependency conflicts with react-day-picker and date-fns
+- ✅ Implemented responsive design improvements
+- ✅ Added comprehensive chart visualizations
+- ✅ Optimized for Vercel deployment
+- ✅ Enhanced TypeScript configuration

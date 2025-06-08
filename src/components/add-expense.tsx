@@ -85,7 +85,7 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
   };
   return (
     <form
-      className="w-full bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm h-[400px] justify-evenly"
+      className="w-full bg-white rounded-xl flex flex-col p-4 gap-3 border border-gray-200 shadow-sm h-[300px] sm:h-[400px] justify-evenly"
       onSubmit={handleSubmit}
     >
       <div className="flex items-center justify-between border-b border-gray-200 pb-3">
