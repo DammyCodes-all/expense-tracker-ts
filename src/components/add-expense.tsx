@@ -63,11 +63,11 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
   };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (!localStorage.getItem("id")) {
-      localStorage.setItem("id", JSON.stringify(10000));
+    if (!localStorage.getItem("note-id")) {
+      localStorage.setItem("note-id", JSON.stringify(100));
     }
     const id: number | undefined =
-      JSON.parse(localStorage.getItem("id") || JSON.stringify(10000)) + 1;
+      JSON.parse(localStorage.getItem("note-id") || JSON.stringify(100)) + 1;
     const newExpense: Expense = {
       id: id,
       date: expense.date || new Date(),
