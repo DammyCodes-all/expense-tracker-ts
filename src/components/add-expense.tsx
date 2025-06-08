@@ -64,10 +64,10 @@ const ExpenseAddForm = ({ onAddExpense }: ExpenseAddProps) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (!localStorage.getItem("id")) {
-      localStorage.setItem("id", JSON.stringify(6));
+      localStorage.setItem("id", JSON.stringify(10000));
     }
     const id: number | undefined =
-      JSON.parse(localStorage.getItem("id") || JSON.stringify(8)) + 1;
+      JSON.parse(localStorage.getItem("id") || JSON.stringify(10000)) + 1;
     const newExpense: Expense = {
       id: id,
       date: expense.date || new Date(),
